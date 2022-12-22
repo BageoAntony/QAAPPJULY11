@@ -29,14 +29,22 @@
             on {{q.created_date}}
         </p>
     </div>
+    <div>
+        <form action="{%url 'add-answer' q.id %}" method="post">
+            {%csrf_token%}
+            <input type="text" placeholder="enter your answer" name="answer" class="form-control">
+            <button type="submit" class="btn btn-outline-info mt-2">add</button>
+        </form>
+    </div>
     <!-- Divider-->
     <h5 class="post-title">Answers</h5>
     {%for ans in q.question_answers%}
-    <div>
+    <div class="border rounded-pill p-3 border-success mt-2">
        Answer={{ans}}
        user={{ans.user}}
        date={{ans.created_date}}
        votecount={{ans.votecount}}
+       <a href="{%url 'add-upvote' ans.id %}"class="btn btn-warning btn-sm">upvote</a>
     </div>
     {%endfor%}
     <hr class="my-4" />
